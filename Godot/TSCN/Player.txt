@@ -1,0 +1,13 @@
+class_name Player
+extends Character
+
+var is_flipped : bool = false
+
+onready var tween
+onready var sprite = $Sprite
+
+func _ready():
+	change_direction()
+
+func change_direction(dir = "idle"):
+	sprite.play(dir)

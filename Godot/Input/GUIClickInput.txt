@@ -1,0 +1,2 @@
+if event is InputEventMouseButton and event.is_pressed() and is_clickable and is_selectable:
+	pass

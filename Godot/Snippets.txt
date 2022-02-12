@@ -1,0 +1,9 @@
+Code Snippets
+
+yield(get_tree().create_timer(5.0), "timeout")
+
+ffmpeg -i in.mov -s 640x360 -pix_fmt rgb24 -r 15 -f gif - | gifsicle --optimize=3 --delay=3 > out.gif
+
+ground_layer.motion_offset.y += 0.4 * speed_multiplier
+
+yield(self, "ready")

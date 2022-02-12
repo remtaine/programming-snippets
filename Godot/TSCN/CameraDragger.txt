@@ -1,0 +1,71 @@
+class_name CameraDragger
+extends Node2D
+
+export var camera_speed := 60
+export var mouse_drag_margin := 200
+
+var _is_focused_in = true
+var has_camera_drag = {
+	Vector2.UP: false,
+	Vector2.DOWN: false,
+	Vector2.LEFT: false,
+	Vector2.RIGHT: false,
+	}
+	
+onready var camera = get_parent()
+	
+	
+func _ready() -> void:
+	pass
+
+
+func _notification(what: int) -> void:
+	match what:
+		NOTIFICATION_WM_FOCUS_OUT:
+			_is_focused_in = false
+		NOTIFICATION_WM_FOCUS_IN:
+			_is_focused_in = true
+
+
+func _process(delta: float) -> void:
+	for key in has_camera_drag.keys():
+		if has_camera_drag[key] and _is_focused_in:
+			move(key, delta)
+
+
+func _input(event: InputEvent) -> void:
+		if event is InputEventMouseMotion:
+			var m_pos = (get_viewport().get_mouse_position())
+			var screen_size = get_viewport_rect().size
+			
+			if (m_pos.x) < mouse_drag_margin: #wha
+				has_camera_drag[Vector2.LEFT] = true
+			else:
+				has_camera_drag[Vector2.LEFT] = false
+
+			if (screen_size.x - m_pos.x) < mouse_drag_margin: #wha
+				has_camera_drag[Vector2.RIGHT] = true
+			else:
+				has_camera_drag[Vector2.RIGHT] = false
+
+			if (m_pos.y) < mouse_drag_margin: #wha
+				has_camera_drag[Vector2.UP] = true
+			else:
+				has_camera_drag[Vector2.UP] = false
+				
+			if (screen_size.y - m_pos.y) < mouse_drag_margin: #wha
+				has_camera_drag[Vector2.DOWN] = true
+			else:
+				has_camera_drag[Vector2.DOWN] = false	
+
+
+func move(dir : Vector2, delta) -> void:
+	match dir:
+		Vector2.UP:
+			camera.position += Vector2.UP * camera_speed * delta
+		Vector2.DOWN:
+			camera.position += Vector2.DOWN * camera_speed * delta
+		Vector2.LEFT:
+			camera.position += Vector2.LEFT * camera_speed * delta
+		Vector2.RIGHT:
+			camera.position += Vector2.RIGHT * camera_speed * delta

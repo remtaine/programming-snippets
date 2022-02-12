@@ -1,0 +1,11 @@
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.is_pressed():
+		mouse_start_pos = get_global_mouse_position()
+		player_start_pos = global_position
+		print(mouse_start_pos, " ", player_start_pos)
+				
+	elif event is InputEventMouseMotion and Input.is_action_pressed("mouse"):
+		global_position = player_start_pos + (get_global_mouse_position() - mouse_start_pos)
+		var leeway := 60
+		global_position.x = clamp(global_position.x, leeway, 540 - leeway)
+		global_position.y = clamp(global_position.y, leeway, 960 - leeway)

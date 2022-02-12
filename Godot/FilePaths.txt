@@ -1,0 +1,3 @@
+Android SDK Path: /Users/benjokho/Library/Android/sdk
+
+scons godotbinpath="/Users/benjokho/godot-3.2.3-stable/Godot.app/Contents/MacOs/Godot" platform=osx use_llvm=yes

@@ -1,0 +1,3 @@
+func tween_rotation_degrees(angle : int, duration := lean_duration):
+	owner.tween.interpolate_property(owner.sprite_pivot,"rotation_degrees", owner.sprite_pivot.rotation_degrees, angle, duration, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	owner.tween.start()

@@ -1,0 +1,22 @@
+class_name StateMachine
+extends Node
+
+
+func get_raw_input() -> Dictionary:
+	var inputs := {
+		is_moving = get_input_direction().length_squared() != 0,
+		input_direction = get_input_direction(),
+		is_shooting = Input.is_action_pressed("shoot"),
+	}
+	return inputs
+
+
+func interpret_inputs(input):
+	if input.is_moving:
+		return "moving"
+	else:
+		return "idle"
+
+
+func get_input_direction() -> Vector2:
+	return Vector2(float(Input.is_action_pressed("ui_right")) - float(Input.is_action_pressed("ui_left")), float(Input.is_action_pressed("ui_down")) - float(Input.is_action_pressed("ui_up")))
